@@ -1,13 +1,13 @@
 "use strict";
 
-let usersChoice = prompt("rock, paper or scissors? ");
-let computerChoice = getRpsDecision(getRandomNum());
+let usersChoice;
+let computerChoice = getCpuDecision(getRandomNum());
 
 function getRandomNum() {
   return Math.trunc(Math.random() * 3 + 1);
 }
 
-function getRpsDecision(num) {
+function getCpuDecision(num) {
   switch (num) {
     case 1:
       return "rock";
