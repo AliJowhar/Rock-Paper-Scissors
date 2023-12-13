@@ -6,6 +6,8 @@ let rockBtn = document.querySelector(".rock");
 const paperBtn = document.querySelector(".paper");
 const scissorsBtn = document.querySelector(".scissors");
 
+const resetBtn = document.querySelector(".reset");
+
 let userScore = 0;
 let computerScore = 0;
 
@@ -77,7 +79,11 @@ function playround(playersChoice, computer) {
     computerChoice = getCpuDecision(getRandomNum());
     checkWinner(usersChoice, computerChoice);
   } else {
-    alert("Game OVER, press reset to start a new game");
+    if (userScore > computerScore) {
+      alert("YOU wIN !  Press reset to start a new game");
+    } else {
+      alert("YOU LOSE...  Press reset to try again");
+    }
   }
 }
 
@@ -87,8 +93,14 @@ function displayPlayer() {
   playerscreen.style.whiteSpace = "pre-line";
 }
 function displayComputer() {
-  computerScreen.textContent = `Player Chose: ${computerChoice} \n player score: ${computerScore}`;
+  computerScreen.textContent = `computer Chose: ${computerChoice} \n player score: ${computerScore}`;
   computerScreen.style.whiteSpace = "pre-line";
 }
 
-console.log(playerscreen.textContent);
+resetBtn.addEventListener("click", () => {
+  userScore = 0;
+  computerScore = 0;
+
+  playerscreen.textContent = "";
+  computerScreen.textContent = "";
+});
