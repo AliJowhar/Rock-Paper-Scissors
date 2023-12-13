@@ -1,7 +1,35 @@
 "use strict";
+let playerscreen = document.querySelector(".player-screen");
+let computerScreen = document.querySelector(".cpu-screens");
+
+let rockBtn = document.querySelector(".rock");
+const paperBtn = document.querySelector(".paper");
+const scissorsBtn = document.querySelector(".scissors");
+
+let userScore = 0;
+let computerScore = 0;
 
 let usersChoice;
-let computerChoice = getCpuDecision(getRandomNum());
+let computerChoice;
+
+rockBtn.addEventListener("click", () => {
+  usersChoice = "Rock";
+  playround(usersChoice, computerChoice);
+  displayPlayer();
+  displayComputer();
+});
+paperBtn.addEventListener("click", () => {
+  usersChoice = "Paper";
+  playround(usersChoice, computerChoice);
+  displayPlayer();
+  displayComputer();
+});
+scissorsBtn.addEventListener("click", () => {
+  usersChoice = "Scissors";
+  playround(usersChoice, computerChoice);
+  displayPlayer();
+  displayComputer();
+});
 
 function getRandomNum() {
   return Math.trunc(Math.random() * 3 + 1);
@@ -10,13 +38,13 @@ function getRandomNum() {
 function getCpuDecision(num) {
   switch (num) {
     case 1:
-      return "rock";
+      return "Rock";
 
     case 2:
-      return "paper";
+      return "Paper";
 
     case 3:
-      return "scissors";
+      return "Scissors";
 
     default:
       return "Not a proper value";
@@ -25,21 +53,42 @@ function getCpuDecision(num) {
 
 // Check who wins
 function checkWinner(player, computer) {
-  if (player == "rock" && computerChoice == "scissors") {
-    return player;
-  } else if (player == "paper" && computer == "rock") {
-    return player;
-  } else if (player == "scissors" && computer == "paper") {
+  if (player == "Rock" && computerChoice == "Scissors") {
+    userScore++;
+    return "Plauer Wins";
+  } else if (player == "Paper" && computer == "Rock") {
+    userScore++;
+    return "player Wins";
+  } else if (player == "Scissors" && computer == "Paper") {
+    userScore++;
+
     return player;
   } else if (player === computer) {
     return "It is a draw";
   } else {
-    return computer;
+    computerScore++;
+    return "computer Wins, you lose";
   }
 }
 
-console.log("the winner is; " + checkWinner(usersChoice, computerChoice));
-console.log("Users choice: " + usersChoice);
-console.log("Computer choice: " + computerChoice);
+//Play round
+function playround(playersChoice, computer) {
+  if (userScore < 5 && computerScore < 5) {
+    computerChoice = getCpuDecision(getRandomNum());
+    checkWinner(usersChoice, computerChoice);
+  } else {
+    alert("Game OVER, press reset to start a new game");
+  }
+}
 
 // Display Winner
+function displayPlayer() {
+  playerscreen.textContent = `Player Chose: ${usersChoice} \n player score: ${userScore}`;
+  playerscreen.style.whiteSpace = "pre-line";
+}
+function displayComputer() {
+  computerScreen.textContent = `Player Chose: ${computerChoice} \n player score: ${computerScore}`;
+  computerScreen.style.whiteSpace = "pre-line";
+}
+
+console.log(playerscreen.textContent);

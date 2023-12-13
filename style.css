@@ -1,0 +1,24 @@
+.main-container {
+  width: 500px;
+  height: 400px;
+  background-color: rgb(200, 227, 227);
+  border: 2px black solid;
+  display: flex;
+  gap: 40px;
+}
+
+.human-side {
+  display: block;
+}
+
+.player-screen,
+.screen {
+  background-color: blanchedalmond;
+  width: 230px;
+  height: 100px;
+  text-align: center;
+}
+
+button {
+  width: 74px;
+}
